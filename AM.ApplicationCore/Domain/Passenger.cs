@@ -30,6 +30,8 @@ public class Passenger
 
     public int TelNumber { get; set; }
 
+    public int IsTraveller { get; set; }
+
     public int Age
     {
         get

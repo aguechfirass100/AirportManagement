@@ -9,6 +9,8 @@ public class Traveller : Passenger
     public string HealthInformation { get; set; }
     public string Nationality { get; set; }
 
+    public string TravellerSpecificProperty { get; set; }
+
     public Traveller() { }
 
     public Traveller(int id, FullName fullName, DateTime birthDate,
