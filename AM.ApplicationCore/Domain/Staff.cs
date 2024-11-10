@@ -21,10 +21,9 @@ public class Staff : Passenger
         Salary = salary;
     }
 
-    public override void PassengerType()
+    public override string GetPassengerType()
     {
-        base.PassengerType();
-        Console.WriteLine("I am a staff member");
+        return "I am a Staff member";
     }
 
     public override string ToString()

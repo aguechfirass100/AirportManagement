@@ -38,9 +38,30 @@ namespace AM.UI.ConsoleApp
             Console.WriteLine(passenger.CheckProfile("Firass", "Aguech", "wrong@aguech.com"));
             Console.WriteLine(passenger.CheckProfile("Firass", "Aguech", null));
 
-            passenger.PassengerType();
-            staff.PassengerType();
-            traveller.PassengerType();
+            string passengerType = passenger.GetPassengerType();
+            string staffType = staff.GetPassengerType();
+            string travellerType = traveller.GetPassengerType();
+
+            Console.WriteLine(passengerType);
+            Console.WriteLine(staffType);
+            Console.WriteLine(travellerType);
+
+            Passenger passenger1 = new Passenger(100, "John", "Doe", new DateTime(1990, 5, 15), "john.doe@example.com", "X123456789", 123456789);
+
+            int ageByValue = 0;
+            passenger1.GetAge(passenger1.BirthDate, ref ageByValue);
+            Console.WriteLine($"Age calculated by value (ref): {ageByValue}"); 
+
+            Console.WriteLine($"Passenger's Age (after GetAge by ref): {passenger1.Age}");  
+
+            //passenger1.GetAge(passenger1);
+            Console.WriteLine($"Passenger's Age (after GetAge by reference): {passenger1.Age}");
+
+            Console.WriteLine(passenger1.ToString()); 
+
+            Console.WriteLine($"Calculated Age: {passenger1.Age}");
+
+            Console.ReadLine();
         }
     }
 }

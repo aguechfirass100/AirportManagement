@@ -14,6 +14,18 @@ public class Passenger
     public string EmailAddress { get; set; }
     public string PassportNumber { get; set; }
     public int TelNumber { get; set; }
+    public int Age
+    {
+        get
+        {
+            int calculatedAge = DateTime.Now.Year - BirthDate.Year;
+            if (DateTime.Now.DayOfYear < BirthDate.DayOfYear)
+            {
+                calculatedAge--;
+            }
+            return calculatedAge;
+        }
+    }
 
     public ICollection<Flight> Flights { get; set; } = new List<Flight>();
 
@@ -54,14 +66,35 @@ public class Passenger
         }
     }
 
-    public virtual void PassengerType()
+    public virtual string GetPassengerType()
     {
-        Console.WriteLine("I am a passenger");
+        return "I am a passenger";
     }
+
+    public void GetAge(DateTime birthDate, ref int calculatedAge)
+    {
+        calculatedAge = DateTime.Now.Year - birthDate.Year;
+
+        if (DateTime.Now.DayOfYear < birthDate.DayOfYear)
+        {
+            calculatedAge--;
+        }
+    }
+
+    // i commented this because we changed the Age to be read-only so we cannot change it.
+    //public void GetAge(Passenger aPassenger)
+    //{
+    //    aPassenger.Age = DateTime.Now.Year - aPassenger.BirthDate.Year;
+
+    //    if (DateTime.Now.DayOfYear < aPassenger.BirthDate.DayOfYear)
+    //    {
+    //        aPassenger.Age--;
+    //    }
+    //}
 
     public override string ToString()
     {
         return $"Passenger ID: {Id}, \nName: {FirstName} {LastName}, \nBirth Date: {BirthDate.ToShortDateString()}, \n" +
-               $"\nEmail: {EmailAddress}, \nPassport: {PassportNumber}, \nPhone: {TelNumber}";
+               $"\nEmail: {EmailAddress}, \nPassport: {PassportNumber}, \nPhone: {TelNumber}, \nAge: {Age}";
     }
 }

@@ -19,10 +19,9 @@ public class Traveller : Passenger
         Nationality = nationality;
     }
 
-    public override void PassengerType()
+    public override string GetPassengerType()
     {
-        base.PassengerType();
-        Console.WriteLine("I am a traveller");
+        return "I am a Traveller";
     }
 
     public override string ToString()
