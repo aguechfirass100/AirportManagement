@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AM.ApplicationCore.Domain;
+using AM.Data.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace AM.Data
@@ -16,16 +17,13 @@ namespace AM.Data
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<Traveller> Travellers { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer(@"Server=AGF-DESKTOP; 
-                                      Database=Airport; 
-                                      Integrated Security=True; 
-                                      TrustServerCertificate=True");
-            }
-        }
+        public AMContext(DbContextOptions<AMContext> options) : base(options) { }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new FlightConfig());
+            modelBuilder.ApplyConfiguration(new PlaneConfig());
+        }
     }
 }

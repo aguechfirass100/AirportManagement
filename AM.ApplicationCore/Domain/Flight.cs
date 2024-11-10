@@ -21,6 +21,7 @@ namespace AM.ApplicationCore.Domain
 
         [ForeignKey("PlaneId")]
         public Plane Plane { get; set; }
+
         public ICollection<Passenger> Passengers { get; set; } = new List<Passenger>();
 
 
