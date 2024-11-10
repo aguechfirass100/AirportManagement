@@ -13,9 +13,8 @@ public class Passenger
     [Required(ErrorMessage = "First Name is required.")]
     [MinLength(3, ErrorMessage = "First Name must be at least 3 characters long.")]
     [MaxLength(25, ErrorMessage = "First Name cannot exceed 25 characters.")]
-    public string FirstName { get; set; }
 
-    public string LastName { get; set; }
+    public FullName FullName { get; set; }
 
     [Display(Name = "Date of Birth")]
     [DataType(DataType.Date, ErrorMessage = "Please enter a valid date.")]
@@ -48,39 +47,31 @@ public class Passenger
 
     public Passenger() { }
 
-    public Passenger(int id, string firstName, string lastName, DateTime birthDate,
+    public Passenger(int id, FullName fullName, DateTime birthDate,
                      string emailAddress, string passportNumber, int telNumber)
     {
         Id = id;
-        FirstName = firstName;
-        LastName = lastName;
+        FullName = fullName;
         BirthDate = birthDate;
         EmailAddress = emailAddress;
         PassportNumber = passportNumber;
         TelNumber = telNumber;
     }
 
-    public bool CheckProfile(string firstName, string lastName)
+    public bool CheckProfile(FullName fullName)
     {
-        return FirstName.Equals(firstName, StringComparison.OrdinalIgnoreCase) 
-            && LastName.Equals(lastName, StringComparison.OrdinalIgnoreCase);
+        return FullName.Equals(fullName);
     }
 
-    public bool CheckProfile(string firstName, string lastName, string emailAddress)
+    public bool CheckProfile(FullName fullName, string emailAddress)
     {
-        return CheckProfile(firstName, lastName) && EmailAddress.Equals(emailAddress, StringComparison.OrdinalIgnoreCase);
+        return CheckProfile(fullName) && EmailAddress.Equals(emailAddress, StringComparison.OrdinalIgnoreCase);
     }
 
-    public bool CheckProfile1(string firstName, string lastName, string emailAddress)
+    public override string ToString()
     {
-        if (emailAddress == null)
-        {
-            return CheckProfile(firstName, lastName);
-        }
-        else
-        {
-            return CheckProfile(firstName, lastName, emailAddress);
-        }
+        return $"Passenger ID: {Id}, \nName: {FullName.ToString()}, \nBirth Date: {BirthDate.ToShortDateString()}, \n" +
+               $"\nEmail: {EmailAddress}, \nPassport: {PassportNumber}, \nPhone: {TelNumber}, \nAge: {Age}";
     }
 
     public virtual string GetPassengerType()
@@ -109,9 +100,4 @@ public class Passenger
     //    }
     //}
 
-    public override string ToString()
-    {
-        return $"Passenger ID: {Id}, \nName: {FirstName} {LastName}, \nBirth Date: {BirthDate.ToShortDateString()}, \n" +
-               $"\nEmail: {EmailAddress}, \nPassport: {PassportNumber}, \nPhone: {TelNumber}, \nAge: {Age}";
-    }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AM.ApplicationCore.Domain;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -14,10 +15,10 @@ public class Staff : Passenger
 
     public Staff() { }
 
-    public Staff(int id, string firstName, string lastName, DateTime birthDate,
+    public Staff(int id, FullName fullName, DateTime birthDate,
                  string emailAddress, string passportNumber, int telNumber,
                  DateTime employmentDate, string function, decimal salary)
-        : base(id, firstName, lastName, birthDate, emailAddress, passportNumber, telNumber)
+        : base(id, fullName, birthDate, emailAddress, passportNumber, telNumber)
     {
         EmploymentDate = employmentDate;
         Function = function;
