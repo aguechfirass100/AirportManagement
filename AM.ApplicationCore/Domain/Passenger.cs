@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,12 +9,28 @@ using AM.ApplicationCore.Domain;
 public class Passenger
 {
     public int Id { get; set; }
+
+    [Required(ErrorMessage = "First Name is required.")]
+    [MinLength(3, ErrorMessage = "First Name must be at least 3 characters long.")]
+    [MaxLength(25, ErrorMessage = "First Name cannot exceed 25 characters.")]
     public string FirstName { get; set; }
+
     public string LastName { get; set; }
+
+    [Display(Name = "Date of Birth")]
+    [DataType(DataType.Date, ErrorMessage = "Please enter a valid date.")]
     public DateTime BirthDate { get; set; }
+
+    [Required(ErrorMessage = "Email Address is required.")]
+    [EmailAddress(ErrorMessage = "Invalid Email Address.")]
     public string EmailAddress { get; set; }
+
+    [Key]
+    [MaxLength(7, ErrorMessage = "Passport Number must be exactly 7 characters long.")]
     public string PassportNumber { get; set; }
+
     public int TelNumber { get; set; }
+
     public int Age
     {
         get

@@ -64,33 +64,33 @@ namespace AM.UI.ConsoleApp
 
             //Console.ReadLine();
 
-            using var context = new AMContext();
+            //using var context = new AMContext();
 
-            var plane = new Plane
-            {
-                Capacity = 180,
-                ManufactureDate = new DateTime(2015, 5, 10),
-                PlaneType = PlaneType.Airbus
-            };
+            //var plane = new Plane
+            //{
+            //    Capacity = 180,
+            //    ManufactureDate = new DateTime(2015, 5, 10),
+            //    PlaneType = PlaneType.Airbus
+            //};
 
-            context.Planes.Add(plane);
-            context.SaveChanges();
+            //context.Planes.Add(plane);
+            //context.SaveChanges();
 
-            var flight = new Flight
-            {
-                Departure = "New York",
-                Destination = "London",
-                FlightDate = DateTime.Now,
-                EffectiveArrival = DateTime.Now.AddHours(7),
-                EstimatedDuration = 420,
-                Comment = "On time",
-                Plane = plane
-            };
+            //var flight = new Flight
+            //{
+            //    Departure = "New York",
+            //    Destination = "London",
+            //    FlightDate = DateTime.Now,
+            //    EffectiveArrival = DateTime.Now.AddHours(7),
+            //    EstimatedDuration = 420,
+            //    Comment = "On time",
+            //    Plane = plane
+            //};
 
-            context.Flights.Add(flight);
-            context.SaveChanges();
+            //context.Flights.Add(flight);
+            //context.SaveChanges();
 
-            Console.WriteLine("Flight with comment added successfully!");
+            //Console.WriteLine("Flight with comment added successfully!");
         }
     }
 }

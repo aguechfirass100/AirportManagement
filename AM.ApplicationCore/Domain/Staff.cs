@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,13 +8,15 @@ public class Staff : Passenger
 {
     public DateTime EmploymentDate { get; set; }
     public string Function { get; set; }
-    public double Salary { get; set; }
+
+    [Column(TypeName = "decimal(18,2)")]
+    public decimal Salary { get; set; }
 
     public Staff() { }
 
     public Staff(int id, string firstName, string lastName, DateTime birthDate,
                  string emailAddress, string passportNumber, int telNumber,
-                 DateTime employmentDate, string function, double salary)
+                 DateTime employmentDate, string function, decimal salary)
         : base(id, firstName, lastName, birthDate, emailAddress, passportNumber, telNumber)
     {
         EmploymentDate = employmentDate;
