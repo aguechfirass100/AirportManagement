@@ -13,7 +13,7 @@ public class Staff : Passenger
     [Column(TypeName = "decimal(18,2)")]
     public decimal Salary { get; set; }
 
-    public string StaffSpecificProperty { get; set; }
+    //public string StaffSpecificProperty { get; set; }
 
     public Staff() { }
 

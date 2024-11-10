@@ -23,10 +23,29 @@ namespace AM.Data.Configurations
                     .IsRequired();
             });
 
-            builder.HasDiscriminator<int>("IsTraveller")
-            .HasValue<Passenger>(0)
-            .HasValue<Traveller>(1)
-            .HasValue<Staff>(2);
+            builder.ToTable("Passengers");
+
+            builder.HasDiscriminator<int>("îsTraveller")
+                   .HasValue<Traveller>(1)
+                   .HasValue<Staff>(2)
+                   .HasValue<Passenger>(0);
+        }
+    }
+
+    public class TravellerConfig : IEntityTypeConfiguration<Traveller>
+    {
+        public void Configure(EntityTypeBuilder<Traveller> builder)
+        {
+            builder.ToTable("Travellers");
+
+        }
+    }
+
+    public class StaffConfig : IEntityTypeConfiguration<Staff>
+    {
+        public void Configure(EntityTypeBuilder<Staff> builder)
+        {
+            builder.ToTable("Staff");
         }
     }
 }
