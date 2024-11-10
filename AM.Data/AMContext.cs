@@ -24,6 +24,22 @@ namespace AM.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new FlightConfig());
             modelBuilder.ApplyConfiguration(new PlaneConfig());
+
+            ConfigureConvention(modelBuilder);
+        }
+
+        private void ConfigureConvention(ModelBuilder modelBuilder)
+        {
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                foreach (var property in entityType.GetProperties())
+                {
+                    if (property.ClrType == typeof(DateTime))
+                    {
+                        property.SetColumnType("date");
+                    }
+                }
+            }
         }
     }
 }
