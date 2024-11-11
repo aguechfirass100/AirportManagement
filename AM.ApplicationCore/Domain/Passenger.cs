@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 using AM.ApplicationCore.Domain;
 public class Passenger
 {
+    [Key]
     public int Id { get; set; }
 
     [Required(ErrorMessage = "First Name is required.")]
     [MinLength(3, ErrorMessage = "First Name must be at least 3 characters long.")]
     [MaxLength(25, ErrorMessage = "First Name cannot exceed 25 characters.")]
-
     public FullName FullName { get; set; }
 
     [Display(Name = "Date of Birth")]
@@ -24,7 +24,6 @@ public class Passenger
     [EmailAddress(ErrorMessage = "Invalid Email Address.")]
     public string EmailAddress { get; set; }
 
-    [Key]
     [MaxLength(7, ErrorMessage = "Passport Number must be exactly 7 characters long.")]
     public string PassportNumber { get; set; }
 
@@ -46,6 +45,8 @@ public class Passenger
     }
 
     public ICollection<Flight> Flights { get; set; } = new List<Flight>();
+    public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
+
 
     public Passenger() { }
 

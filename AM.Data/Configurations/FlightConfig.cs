@@ -21,6 +21,10 @@ namespace AM.Data.Configurations
                    .WithMany(p => p.Flights)
                    .HasForeignKey(f => f.PlaneId)
                    .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasMany(f => f.Reservations)
+               .WithOne(r => r.Flight)
+               .HasForeignKey(r => r.FlightId);
         }
     }
 }

@@ -23,6 +23,7 @@ namespace AM.ApplicationCore.Domain
         public Plane Plane { get; set; }
 
         public ICollection<Passenger> Passengers { get; set; } = new List<Passenger>();
+        public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
 
 
         public Flight() { }

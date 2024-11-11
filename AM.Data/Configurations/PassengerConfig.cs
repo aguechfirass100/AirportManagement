@@ -29,6 +29,10 @@ namespace AM.Data.Configurations
                    .HasValue<Traveller>(1)
                    .HasValue<Staff>(2)
                    .HasValue<Passenger>(0);
+
+            builder.HasMany(p => p.Reservations)
+               .WithOne(r => r.Passenger)
+               .HasForeignKey(r => r.PassengerId);
         }
     }
 

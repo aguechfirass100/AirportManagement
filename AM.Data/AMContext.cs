@@ -25,6 +25,8 @@ namespace AM.Data
             modelBuilder.ApplyConfiguration(new FlightConfig());
             modelBuilder.ApplyConfiguration(new PlaneConfig());
             modelBuilder.ApplyConfiguration(new PassengerConfig());
+            modelBuilder.ApplyConfiguration(new ReservationConfig());
+
 
             ConfigureConvention(modelBuilder);
         }
