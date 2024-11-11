@@ -36,7 +36,7 @@ namespace AM.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Traveller> builder)
         {
-            builder.ToTable("Travellers");
+            //builder.ToTable("Travellers");
 
         }
     }
@@ -45,7 +45,7 @@ namespace AM.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Staff> builder)
         {
-            builder.ToTable("Staff");
+            //builder.ToTable("Staff");
         }
     }
 }
