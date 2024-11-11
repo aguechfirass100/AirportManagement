@@ -1,14 +1,20 @@
 ﻿using AM.ApplicationCore.Domain;
+using System;
+using System.Numerics;
+using Plane = AM.ApplicationCore.Domain.Plane;
 
 namespace AM.Core.Services
 {
     public class FlightService
     {
         public IList<Flight> Flights { get; set; }
+        //public IList<Plane> Planes { get; set; }
+        private readonly PlaneService planeService;
 
-        public FlightService()
+        public FlightService(PlaneService planeService)
         {
             Flights = new List<Flight>();
+            this.planeService = planeService;
         }
 
         public List<DateTime> GetFlightDates(string destination)
@@ -60,11 +66,11 @@ namespace AM.Core.Services
         {
             var flightDetails = Flights
                 .Where(flight => flight.Plane.PlaneId == planeId)
-                .Select(flight => new { flight.FlightDate, flight.Destination });
+                .Select(flight => new { flight.FlightId, flight.FlightDate, flight.Destination, flight.Plane.PlaneType, flight.Plane.Capacity });
 
             foreach (var detail in flightDetails)
             {
-                Console.WriteLine($"Flight Date: {detail.FlightDate}, Destination: {detail.Destination}");
+                Console.WriteLine($"Flight Number: {detail.FlightId}, Flight Date: {detail.FlightDate}, Destination: {detail.Destination}, Plane Model: {detail.PlaneType}, Plane Capacity: {detail.Capacity}");
             }
         }
 
@@ -113,5 +119,33 @@ namespace AM.Core.Services
                 }
             }
         }
+
+        public void AddFlightWithPlane(int flightId, DateTime flightDate, string destination, int planeId)
+        {
+            Plane plane = planeService.GetPlane(planeId);
+
+            if (plane == null)
+            {
+                Console.WriteLine("Plane not found. Ensure the plane is added first.");
+                return;
+            }
+
+            var flight = new Flight
+            {
+                FlightId = flightId,
+                FlightDate = flightDate,
+                Destination = destination,
+                Plane = plane
+            };
+
+            Flights.Add(flight);
+
+            Console.WriteLine($"Flight ID: {flight.FlightId} added successfully!");
+            Console.WriteLine($"Flight Date: {flight.FlightDate}, Destination: {flight.Destination}");
+            Console.WriteLine($"Plane Model: {flight.Plane.PlaneType}, Plane Capacity: {flight.Plane.Capacity}");
+        }
+
+        
+
     }
 }

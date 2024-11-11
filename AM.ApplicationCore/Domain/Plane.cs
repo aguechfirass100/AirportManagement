@@ -24,7 +24,7 @@ namespace AM.ApplicationCore.Domain
         public DateTime ManufactureDate { get; set; }
         public PlaneType PlaneType { get; set; }
 
-        public ICollection<Flight> Flights { get; set; } = new List<Flight>();
+        public virtual ICollection<Flight> Flights { get; set; } = new List<Flight>();
 
         public Plane() { }
 

@@ -1,6 +1,9 @@
 ﻿using AM.ApplicationCore.Domain;
+using AM.Core.Services;
 using AM.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Numerics;
 
 namespace AM.UI.ConsoleApp
 {
@@ -91,6 +94,85 @@ namespace AM.UI.ConsoleApp
             //context.SaveChanges();
 
             //Console.WriteLine("Flight with comment added successfully!");
+
+
+            //PlaneService planeService = new PlaneService();
+            //FlightService flightService = new FlightService(planeService);
+
+            //planeService.AddPlane(10, 150, new DateTime(2010, 5, 15), PlaneType.Boeing);
+
+            //flightService.AddFlightWithPlane(101, new DateTime(2024, 12, 25), "Paris", 10);
+
+            //Console.WriteLine("\nFlights in the system:");
+            //foreach (var flight in flightService.Flights)
+            //{
+            //    Console.WriteLine($"Flight ID: {flight.FlightId}, Destination: {flight.Destination}, Plane: {flight.Plane.PlaneType}");
+            //}
+
+            //using (var context = new AMContextFactory().CreateDbContext(null))
+            //{
+            //    var flight = context.Flights
+            //        .Include(f => f.Plane) // Explicitly load the related Plane
+            //        .FirstOrDefault(f => f.FlightId == 2);
+
+            //    if (flight != null)
+            //    {
+            //        Console.WriteLine($"Flight ID: {flight.FlightId}");
+            //        Console.WriteLine($"Destination: {flight.Destination}");
+            //        Console.WriteLine($"Flight Date: {flight.FlightDate}");
+
+            //        if (flight.Plane != null)
+            //        {
+            //            Console.WriteLine($"Plane Type: {flight.Plane.PlaneType}");
+            //            Console.WriteLine($"Plane Capacity: {flight.Plane.Capacity}");
+            //            Console.WriteLine($"Manufacture Date: {flight.Plane.ManufactureDate}");
+            //        }
+            //        else
+            //        {
+            //            Console.WriteLine("No plane associated with this flight.");
+            //        }
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine("Flight not found.");
+            //    }
+            //}
+
+            using (var context = new AMContextFactory().CreateDbContext(null))
+            {
+                var flight = context.Flights.FirstOrDefault(f => f.FlightId == 2);
+
+                Console.WriteLine("################################################################");
+
+                if (flight != null)
+                {
+                    Console.WriteLine($"Flight ID: {flight.FlightId}");
+                    Console.WriteLine($"Flight Date: {flight.FlightDate}");
+                    Console.WriteLine($"Destination: {flight.Destination}");
+
+                    var plane = flight.Plane;
+
+                    if (plane != null)
+                    {
+                        Console.WriteLine($"Plane Type: {plane.PlaneType}");
+                        Console.WriteLine($"Plane Capacity: {plane.Capacity}");
+                        Console.WriteLine($"Manufacture Date: {plane.ManufactureDate.ToShortDateString()}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("No plane associated with this flight.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Flight not found.");
+                }
+
+                Console.WriteLine("################################################################");
+            }
+
+
+
         }
     }
 }

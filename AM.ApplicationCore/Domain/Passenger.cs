@@ -44,8 +44,8 @@ public class Passenger
         }
     }
 
-    public ICollection<Flight> Flights { get; set; } = new List<Flight>();
-    public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
+    public virtual ICollection<Flight> Flights { get; set; } = new List<Flight>();
+    public virtual ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
 
 
     public Passenger() { }
